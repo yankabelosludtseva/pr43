@@ -16,13 +16,28 @@
     </Page.Resources>
 
     <Grid>
-        <ListView ItemsSource="{Binding Tasks}" HorizontalAlignment="Stretch" Margin="0,0,0,45">
+        <ListView ItemsSource="{Binding Tasks}" 
+                  HorizontalAlignment="Stretch" 
+                  Margin="0,0,0,45"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+            <!-- Заставляем элементы ListView растягиваться на всю ширину -->
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="5,2"/>
+                    <Setter Property="Padding" Value="0"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <elements:Item DataContext="{Binding}"/>
+                    <!-- Элемент явно растягивается -->
+                    <elements:Item DataContext="{Binding}" HorizontalAlignment="Stretch"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
         <Button Style="{StaticResource Update}"
                 Command="{Binding OnAddTask}"
                 Content="Добавить"

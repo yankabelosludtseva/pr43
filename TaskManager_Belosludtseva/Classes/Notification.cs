@@ -11,7 +11,7 @@ namespace TaskManager_Belosludtseva.Classes
 {
     public class Notification : INotifyPropertyChanged
     {
-        public event PropertyChangingEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {

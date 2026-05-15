@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:TaskManager_Belosludtseva.View.Items"
              mc:Ignorable="d"
              FontFamily="Bahnschrift Light Condensed">
     <UserControl.Resources>
@@ -19,112 +18,124 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Margin="10" Background="White">
+    <!-- Растягиваем на всю доступную ширину -->
+    <Grid Margin="10" Background="White" HorizontalAlignment="Stretch">
         <Grid.Effect>
             <DropShadowEffect Opacity="0.1"/>
         </Grid.Effect>
+
         <Image Width="40" Height="40" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Left"
                Source="/Images/ic-task.png"/>
-        <Grid Margin="60, 0, 0, 0">
+
+        <Grid Margin="60, 0, 0, 0" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="270"/>
+                <ColumnDefinition Width="280"/>
             </Grid.ColumnDefinitions>
-            <Grid Margin="10" Height="60" VerticalAlignment="Top" Background="White">
+
+            <!-- Наименование -->
+            <Grid Margin="10" Height="60" VerticalAlignment="Top" Background="White" HorizontalAlignment="Stretch">
                 <Grid.Effect>
                     <DropShadowEffect Opacity="0.1"/>
                 </Grid.Effect>
                 <Label Content="Наименование:" VerticalAlignment="Top" Margin="10, 0, 10, 0"/>
-                <TextBox
-                    Text="{Binding Name}"
-                    IsEnabled="{Binding IsEnable}"
-                    VerticalContentAlignment="Center"
-                    Margin="10, 25, 10, 0"
-                    VerticalAlignment="Top"
-                    Height="25"/>
+                <TextBox Text="{Binding Name}"
+                         IsEnabled="{Binding IsEnable}"
+                         VerticalContentAlignment="Center"
+                         TextWrapping="NoWrap"
+                         HorizontalScrollBarVisibility="Hidden"
+                         Margin="10, 25, 10, 0"
+                         VerticalAlignment="Top"
+                         Height="25"
+                         HorizontalAlignment="Stretch"/>
             </Grid>
-            <Grid Margin="10, 80, 10, 0" Height="60" VerticalAlignment="Top" Background="White">
+
+            <!-- Приоритет -->
+            <Grid Margin="10, 80, 10, 0" Height="60" VerticalAlignment="Top" Background="White" HorizontalAlignment="Stretch">
                 <Grid.Effect>
                     <DropShadowEffect Opacity="0.1"/>
                 </Grid.Effect>
                 <Label Content="Приоритет:" VerticalAlignment="Top" Margin="10, 0, 10, 0"/>
-                <TextBox
-                    Text="{Binding Priority}"
-                    IsEnabled="{Binding IsEnable}"
-                    VerticalContentAlignment="Center"
-                    Margin="10, 25, 10, 0"
-                    VerticalAlignment="Top"
-                    Height="25"/>
+                <TextBox Text="{Binding Priority}"
+                         IsEnabled="{Binding IsEnable}"
+                         VerticalContentAlignment="Center"
+                         TextWrapping="NoWrap"
+                         HorizontalScrollBarVisibility="Hidden"
+                         Margin="10, 25, 10, 0"
+                         VerticalAlignment="Top"
+                         Height="25"
+                         HorizontalAlignment="Stretch"/>
             </Grid>
-            <Grid Margin="10,10,10,0" Height="60" VerticalAlignment="Top" Background="White" Grid.Column="1">
+
+            <!-- Срок выполнения -->
+            <Grid Margin="10,10,10,0" Height="60" VerticalAlignment="Top" Background="White" Grid.Column="1" HorizontalAlignment="Stretch">
                 <Grid.Effect>
                     <DropShadowEffect Opacity="0.1"/>
                 </Grid.Effect>
                 <Label Content="Срок выполнения:" VerticalAlignment="Top" Margin="10, 0, 10, 0"/>
-                <DatePicker
-                    SelectedDate="{Binding DateExecute}"
-                    IsEnabled="{Binding IsEnable}"
-                    Margin="10, 25, 10, 0"
-                    VerticalAlignment="Top"
-                    Height="25"/>
+                <DatePicker SelectedDate="{Binding DateExecute}"
+                            IsEnabled="{Binding IsEnable}"
+                            Margin="10, 25, 10, 0"
+                            VerticalAlignment="Top"
+                            Height="25"
+                            HorizontalAlignment="Stretch"/>
             </Grid>
-            <Grid Margin="10,80,10,0" Height="60" VerticalAlignment="Top" Background="White" Grid.Column="1">
+
+            <!-- Комментарий -->
+            <Grid Margin="10,80,10,0" Height="60" VerticalAlignment="Top" Background="White" Grid.Column="1" HorizontalAlignment="Stretch">
                 <Grid.Effect>
                     <DropShadowEffect Opacity="0.1"/>
                 </Grid.Effect>
                 <Label Content="Комментарий:" VerticalAlignment="Top" Margin="10, 0, 10, 0"/>
-                <TextBox
-                    Text="{Binding Comment}"
-                    IsEnabled="{Binding IsEnable}"
-                    VerticalContentAlignment="Center"
-                    Margin="10, 25, 10, 0"
-                    VerticalAlignment="Top"
-                    Height="25"/>
+                <TextBox Text="{Binding Comment}"
+                         IsEnabled="{Binding IsEnable}"
+                         VerticalContentAlignment="Center"
+                         TextWrapping="NoWrap"
+                         HorizontalScrollBarVisibility="Hidden"
+                         Margin="10, 25, 10, 0"
+                         VerticalAlignment="Top"
+                         Height="25"
+                         HorizontalAlignment="Stretch"/>
             </Grid>
-            <Button Style="{StaticResource Update}"
-                    Command="{Binding OnEdit}"
-                    Content="{Binding IsEnableText}"
-                    Height="25"
-                    Width="70"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Right"
-                    Margin="0,145,10,0"
-                    Grid.Column="1">
-                <Button.Effect>
-                    <DropShadowEffect Opacity="0.5" BlurRadius="3" ShadowDepth="3"/>
-                </Button.Effect>
-            </Button>
-            <Button
-                Style="{StaticResource Update}"
-                IsEnabled="{Binding IsEnable}"
-                Content="{Binding IsDoneText}"
-                Command="{Binding OnDone}"
-                Height="25"
-                Width="70"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Right"
-                Margin="0,145,85,10"
-                Grid.Column="1">
-                <Button.Effect>
-                    <DropShadowEffect Opacity="0.5" BlurRadius="3" ShadowDepth="3"/>
-                </Button.Effect>
-            </Button>
-            <Button
-                x:Name="test"
-                Style="{StaticResource Delete}"
-                IsEnabled="{Binding IsEnable}"
-                Command="{Binding OnDelete}"
-                Content="Удалить"
-                Height="25"
-                Width="70"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Right"
-                Margin="0,145,160,0"
-                Grid.Column="1" >
-                <Button.Effect>
-                    <DropShadowEffect Opacity="0.5" BlurRadius="3" ShadowDepth="3"/>
-                </Button.Effect>
-            </Button>
+
+            <!-- Кнопки управления -->
+            <!-- StackPanel выравнивает кнопки вправо. 
+                 Последняя кнопка в списке будет самой правой -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,145,10,0" Grid.Column="1">
+
+                <!-- 1. Удалить (Теперь левая) -->
+                <Button Style="{StaticResource Delete}"
+                        IsEnabled="{Binding IsEnable}"
+                        Command="{Binding OnDelete}"
+                        Content="Удалить"
+                        Height="25" Width="70" Margin="0,0,5,0">
+                    <Button.Effect>
+                        <DropShadowEffect Opacity="0.5" BlurRadius="3" ShadowDepth="3"/>
+                    </Button.Effect>
+                </Button>
+
+                <!-- 2. Выполнено (Средняя) -->
+                <Button Style="{StaticResource Update}"
+                        IsEnabled="{Binding IsEnable}"
+                        Content="{Binding IsDoneText}"
+                        Command="{Binding OnDone}"
+                        Height="25" Width="70" Margin="0,0,5,0">
+                    <Button.Effect>
+                        <DropShadowEffect Opacity="0.5" BlurRadius="3" ShadowDepth="3"/>
+                    </Button.Effect>
+                </Button>
+
+                <!-- 3. Изменить/Сохранить (Самая правая) -->
+                <Button Style="{StaticResource Update}"
+                        Command="{Binding OnEdit}"
+                        Content="{Binding IsEnableText}"
+                        Height="25" Width="70">
+                    <Button.Effect>
+                        <DropShadowEffect Opacity="0.5" BlurRadius="3" ShadowDepth="3"/>
+                    </Button.Effect>
+                </Button>
+
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

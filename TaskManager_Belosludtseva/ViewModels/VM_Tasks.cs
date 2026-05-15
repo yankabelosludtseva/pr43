@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaskManager_Belosludtseva.Classes;
 using TaskManager_Belosludtseva.Context;
 using TaskManager_Belosludtseva.Models;
@@ -12,12 +9,15 @@ namespace TaskManager_Belosludtseva.ViewModels
 {
     public class VM_Tasks : Notification
     {
-        public TasksContext tasksContext = new TasksContext();
-
+        public TasksContext tasksContext { get; set; }
         public ObservableCollection<Tasks> Tasks { get; set; }
 
-        public VM_Tasks() =>
-            Tasks = new ObservableCollection<Tasks>(tasksContext.Tasks.OrderBy(x => x.Done));
+        public VM_Tasks()
+        {
+            tasksContext = new TasksContext();
+            
+            Tasks = new ObservableCollection<Tasks>(tasksContext.Tasks.OrderBy(x => x.Done).ToList());
+        }
 
         public RealyCommand OnAddTask
         {
@@ -25,13 +25,20 @@ namespace TaskManager_Belosludtseva.ViewModels
             {
                 return new RealyCommand(obj =>
                 {
-                    Tasks NewTask = new Tasks()
+                    
+                    Tasks newTask = new Tasks()
                     {
-                        DateExecute = DateTime.Now
+                        Name = "",
+                        Priority = "",
+                        DateExecute = DateTime.Now,
+                        Comment = "",
+                        Done = false
+                       
                     };
-                    Tasks.Add(NewTask);
-                    tasksContext.Tasks.Add(NewTask);
-                    tasksContext.SaveChanges();
+
+                    Tasks.Add(newTask);
+
+                    tasksContext.Tasks.Add(newTask);
                 });
             }
         }
